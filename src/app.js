@@ -6,11 +6,14 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
+  // calling the function to create deck onload
   createDeck();
+  // getting the button to rerun generate card function when clicked
   document.querySelector(".btn").addEventListener("click", function() {
     generateCard();
   });
 };
+// creating the deck
 let deck = [];
 let suits = ["♦", "♣", "♥", "♠"];
 let numbers = [
