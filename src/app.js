@@ -32,14 +32,9 @@ let numbers = [
   "A"
 ];
 const createDeck = () => {
-  // for (let number in numbers) {
-  //   for (let suit in suits) {
-  //     deck.push({ num: number, cardSuit: suit });
-  //   }
-  // }
   for (let i = 0; i < numbers.length; i++) {
     for (let x = 0; x < suits.length; x++) {
-      deck.push({ num: numbers[i], cardSuit: suits[x] });
+      deck.push({ number: numbers[i], suit: suits[x] });
     }
   }
 };
@@ -49,8 +44,11 @@ const generateCard = () => {
     createDeck();
   }
 
-  let randomSuit = suits[Math.floor(Math.random() * suits.length)];
-  let randomNumbers = numbers[Math.floor(Math.random() * numbers.length)];
+  let randomCard = deck[Math.floor(Math.random() * deck.length)];
+
+  // Access the random card's number and suit
+  let randomNumber = randomCard.number;
+  let randomSuit = randomCard.suit;
 
   if (randomSuit === "♦" || randomSuit === "♥") {
     document.querySelector(".top").style.color = "red";
@@ -61,27 +59,17 @@ const generateCard = () => {
     document.querySelector(".num").style.color = "black";
     document.querySelector(".bottom").style.color = "black";
   }
-
-  // for (let i = 0; i < deck.length; i++) {
-  //   if (deck[i].num === randomNumbers && deck[i].cardSuit === randomSuit) {
-  //     // deck = deck.filter(
-  //     //   card => card.num !== randomNumbers && card.cardSuit !== randomSuit
-  //     // );
-  //     deck = deck.filter(
-  //       card => card.num !== randomNumbers && card.cardSuit !== randomSuit
-  //     );
-  //   }
-  // }
+  console.log(randomNumber, randomSuit);
   for (let i = 0; i < deck.length; i++) {
-    if (deck[i].num === randomNumbers && deck[i].cardSuit === randomSuit) {
+    if (deck[i].number === randomNumber && deck[i].suit === randomSuit) {
       deck = deck.filter(
-        card => !(card.num === randomNumbers && card.cardSuit === randomSuit)
+        card => !(card.number === randomNumber && card.suit === randomSuit)
       );
       break; // Break the loop once the card is found and removed
     }
   }
   console.log(deck.length);
   document.querySelector(".top").innerHTML = randomSuit;
-  document.querySelector(".num").innerHTML = randomNumbers;
+  document.querySelector(".num").innerHTML = randomNumber;
   document.querySelector(".bottom").innerHTML = randomSuit;
 };
